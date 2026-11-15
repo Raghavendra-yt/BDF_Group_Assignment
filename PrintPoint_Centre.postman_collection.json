@@ -1,0 +1,641 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		"name": "PrintPoint Centre API",
+		"description": "Complete test collection for the PrintPoint Centre 3D Printer Reservation & Queue Management System.\n\nCovers all CRUD endpoints, validation errors, Smart Search, and JOIN queries.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Health Check",
+			"item": [
+				{
+					"name": "GET / — API Root",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/",
+							"host": ["{{baseUrl}}"],
+							"path": [""]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Designers",
+			"item": [
+				{
+					"name": "GET /designers — List all designers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/designers",
+							"host": ["{{baseUrl}}"],
+							"path": ["designers"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /designers/:id — Get designer by ID (200)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/designers/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["designers", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /designers/:id — Designer not found (404)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/designers/999",
+							"host": ["{{baseUrl}}"],
+							"path": ["designers", "999"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /designers — Create designer (201)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Fiona McGregor\",\n  \"email\": \"fiona@printpoint.io\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/designers",
+							"host": ["{{baseUrl}}"],
+							"path": ["designers"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /designers — Missing name (400)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"noname@printpoint.io\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/designers",
+							"host": ["{{baseUrl}}"],
+							"path": ["designers"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /designers — Missing email (400)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Ghost User\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/designers",
+							"host": ["{{baseUrl}}"],
+							"path": ["designers"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /designers — Duplicate email (400)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Alice Dupe\",\n  \"email\": \"alice@printpoint.io\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/designers",
+							"host": ["{{baseUrl}}"],
+							"path": ["designers"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /designers — Invalid email format (400)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Bad Email\",\n  \"email\": \"not-an-email\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/designers",
+							"host": ["{{baseUrl}}"],
+							"path": ["designers"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Printers",
+			"item": [
+				{
+					"name": "GET /printers — List all printers (200)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/printers",
+							"host": ["{{baseUrl}}"],
+							"path": ["printers"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /printers/:id — Get printer by ID (200)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/printers/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["printers", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /printers/:id — Printer not found (404)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/printers/999",
+							"host": ["{{baseUrl}}"],
+							"path": ["printers", "999"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /printers — Create printer (201)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Elegoo Saturn 3\",\n  \"material\": \"Resin\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/printers",
+							"host": ["{{baseUrl}}"],
+							"path": ["printers"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /printers — Missing fields (400)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Incomplete Printer\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/printers",
+							"host": ["{{baseUrl}}"],
+							"path": ["printers"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /printers — Empty strings (400)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"   \",\n  \"material\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/printers",
+							"host": ["{{baseUrl}}"],
+							"path": ["printers"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT /printers/:id — Update printer (200)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Prusa MK4S Printer (Upgraded)\",\n  \"material\": \"PETG\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/printers/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["printers", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT /printers/:id — Printer not found (404)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Ghost Printer\",\n  \"material\": \"PLA\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/printers/999",
+							"host": ["{{baseUrl}}"],
+							"path": ["printers", "999"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT /printers/:id — Missing fields (400)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"No Material\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/printers/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["printers", "1"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /printers/:id — Delete printer (200)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/printers/6",
+							"host": ["{{baseUrl}}"],
+							"path": ["printers", "6"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /printers/:id — Printer not found (404)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/printers/999",
+							"host": ["{{baseUrl}}"],
+							"path": ["printers", "999"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Printers — Smart Search (Twist)",
+			"item": [
+				{
+					"name": "Smart Search — ?q=printer (lowercase match)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/printers?q=printer",
+							"host": ["{{baseUrl}}"],
+							"path": ["printers"],
+							"query": [
+								{
+									"key": "q",
+									"value": "printer"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Smart Search — ?q=PRINTER (case-insensitive)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/printers?q=PRINTER",
+							"host": ["{{baseUrl}}"],
+							"path": ["printers"],
+							"query": [
+								{
+									"key": "q",
+									"value": "PRINTER"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Smart Search — ?q=zzz (no results → Nothing found)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/printers?q=zzz",
+							"host": ["{{baseUrl}}"],
+							"path": ["printers"],
+							"query": [
+								{
+									"key": "q",
+									"value": "zzz"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Smart Search — ?q=resin (material match)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/printers?q=resin",
+							"host": ["{{baseUrl}}"],
+							"path": ["printers"],
+							"query": [
+								{
+									"key": "q",
+									"value": "resin"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Smart Search — ?q=pla (partial material match)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/printers?q=pla",
+							"host": ["{{baseUrl}}"],
+							"path": ["printers"],
+							"query": [
+								{
+									"key": "q",
+									"value": "pla"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reservations",
+			"item": [
+				{
+					"name": "GET /reservations — List all (JOIN) (200)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/reservations",
+							"host": ["{{baseUrl}}"],
+							"path": ["reservations"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /reservations — Create reservation (201)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"designer_id\": 2,\n  \"printer_id\": 3,\n  \"print_duration_hours\": 4.5,\n  \"status\": \"queued\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/reservations",
+							"host": ["{{baseUrl}}"],
+							"path": ["reservations"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /reservations — Missing designer_id (400)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"printer_id\": 1,\n  \"print_duration_hours\": 2.0\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/reservations",
+							"host": ["{{baseUrl}}"],
+							"path": ["reservations"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /reservations — Designer not found (404)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"designer_id\": 999,\n  \"printer_id\": 1,\n  \"print_duration_hours\": 2.0,\n  \"status\": \"queued\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/reservations",
+							"host": ["{{baseUrl}}"],
+							"path": ["reservations"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /reservations — Printer not found (404)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"designer_id\": 1,\n  \"printer_id\": 999,\n  \"print_duration_hours\": 2.0,\n  \"status\": \"queued\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/reservations",
+							"host": ["{{baseUrl}}"],
+							"path": ["reservations"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /reservations — Invalid duration (400)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"designer_id\": 1,\n  \"printer_id\": 1,\n  \"print_duration_hours\": -5,\n  \"status\": \"queued\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/reservations",
+							"host": ["{{baseUrl}}"],
+							"path": ["reservations"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /reservations — Invalid status (400)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"designer_id\": 1,\n  \"printer_id\": 1,\n  \"print_duration_hours\": 2.0,\n  \"status\": \"exploded\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/reservations",
+							"host": ["{{baseUrl}}"],
+							"path": ["reservations"]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
