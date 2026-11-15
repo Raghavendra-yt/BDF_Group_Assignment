@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------
-// routes/reservations.js — Reservations with JOIN query
+// routes/reservations.js — Reservations with JOIN + creation validation
 // ---------------------------------------------------------------------------
 const express = require('express');
 const router  = express.Router();
@@ -34,8 +34,49 @@ router.post('/', (req, res) => {
   try {
     const { designer_id, printer_id, print_duration_hours, status } = req.body;
 
-    const finalStatus = status || 'queued';
+    // ── Validate required fields ──
+    if (designer_id === undefined || designer_id === null) {
+      return res.status(400).json({
+        error: "Validation failed: 'designer_id' is required."
+      });
+    }
+    if (printer_id === undefined || printer_id === null) {
+      return res.status(400).json({
+        error: "Validation failed: 'printer_id' is required."
+      });
+    }
+    if (print_duration_hours === undefined || print_duration_hours === null) {
+      return res.status(400).json({
+        error: "Validation failed: 'print_duration_hours' is required."
+      });
+    }
+    if (typeof print_duration_hours !== 'number' || print_duration_hours <= 0) {
+      return res.status(400).json({
+        error: "Validation failed: 'print_duration_hours' must be a positive number."
+      });
+    }
 
+    const validStatuses = ['queued', 'printing', 'completed'];
+    const finalStatus   = status ? String(status).trim().toLowerCase() : 'queued';
+    if (!validStatuses.includes(finalStatus)) {
+      return res.status(400).json({
+        error: `Validation failed: 'status' must be one of: ${validStatuses.join(', ')}.`
+      });
+    }
+
+    // ── Check designer exists ──
+    const designer = db.prepare('SELECT id FROM designers WHERE id = ?').get(designer_id);
+    if (!designer) {
+      return res.status(404).json({ error: `Designer with id ${designer_id} not found.` });
+    }
+
+    // ── Check printer exists ──
+    const printer = db.prepare('SELECT id FROM printers WHERE id = ?').get(printer_id);
+    if (!printer) {
+      return res.status(404).json({ error: `Printer with id ${printer_id} not found.` });
+    }
+
+    // ── Insert ──
     const info = db.prepare(
       'INSERT INTO reservations (designer_id, printer_id, print_duration_hours, status) VALUES (?, ?, ?, ?)'
     ).run(designer_id, printer_id, print_duration_hours, finalStatus);
