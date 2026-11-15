@@ -32,7 +32,7 @@ The project work is distributed across five modular domains matching the client 
 | **2** | 252U1R8060 | **Abdul Samad** | **Database & Persistence – Major** | SQLite database initialization, relational schema creation, WAL pragma configuration, foreign key enforcement (`PRAGMA foreign_keys = ON`), and atomic database auto-seeding (`db.js`). |
 | **3** | 252U1R8089 | **Karthikeya** | **REST CRUD & Queue Engine – Major** | Full CRUD implementation for 3D printers, designer registration endpoints, and the multi-table `INNER JOIN` query returning live queue states with designer and machine names. |
 | **4** | 252U1R8076 | **Sai Siva Teja** | **Validation Guard & Smart Search Twist – Major** | Strict input validation pipelines (type checking, non-empty whitespace stripping), email regex validation, foreign key existence verification, and the case-insensitive partial Smart Search twist (`?q=...`). |
-| **5** | 252U1R80 | **Anish** | **Testing, Documentation & QA – Major** | Comprehensive 28-request Postman v2.1 test collection with automated test scripts, full regression test suite (`test-all.js`), and exhaustive project documentation (`README.md`). |
+| **5** | 252U1R8067 | **Anish** | **Testing, Documentation & QA – Major** | Comprehensive 28-request Postman v2.1 test collection with automated test scripts, full regression test suite (`test-all.js`), and exhaustive project documentation (`README.md`). |
 
 ### Contribution Structure
 - **5 Focused Modules:** Server & Middleware, Database Architecture, Core REST & Relational Queries, Validation & Smart Search Twist, and QA / Postman Test Automation.
