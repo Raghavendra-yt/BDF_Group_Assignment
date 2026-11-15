@@ -26,13 +26,13 @@ PrintPoint Centre eliminates physical desk bottlenecks and opaque machine queues
 
 The project work is distributed across five modular domains matching the client brief specifications (**ST-CSEQE2B-G04**):
 
-| S.No. | Team Member Name | GitHub Username | Branch / Module | Responsibilities |
+| S.No. | Registration Number | Team Member Name | Branch / Module | Responsibilities |
 | :---: | :--- | :--- | :--- | :--- |
-| **1** | **Raghavendra** | [@Raghavendra-yt](https://github.com/Raghavendra-yt) | **Server & Routing Architecture – Major** | Express application setup, global middleware, JSON parser, modular route mounting, 404 handler, and centralised error handling pipeline (`server.js`). |
-| **2** | **Abdul Samad** | [@abdulsamad301207-star](https://github.com/abdulsamad301207-star) | **Database & Persistence – Major** | SQLite database initialization, relational schema creation, WAL pragma configuration, foreign key enforcement (`PRAGMA foreign_keys = ON`), and atomic database auto-seeding (`db.js`). |
-| **3** | **Karthikeya** | [@jayraguhuram-commits](https://github.com/jayraguhuram-commits) | **REST CRUD & Queue Engine – Major** | Full CRUD implementation for 3D printers, designer registration endpoints, and the multi-table `INNER JOIN` query returning live queue states with designer and machine names. |
-| **4** | **Sai Siva Teja** | [@sivamanidharreddy-cloud](https://github.com/sivamanidharreddy-cloud) | **Validation Guard & Smart Search Twist – Major** | Strict input validation pipelines (type checking, non-empty whitespace stripping), email regex validation, foreign key existence verification, and the case-insensitive partial Smart Search twist (`?q=...`). |
-| **5** | **Anish** | [@orugalluanesh-ops](https://github.com/orugalluanesh-ops) | **Testing, Documentation & QA – Major** | Comprehensive 28-request Postman v2.1 test collection with automated test scripts, full regression test suite (`test-all.js`), and exhaustive project documentation (`README.md`). |
+| **1** | 252U1R8052 | **Raghavendra** | **Server & Routing Architecture – Major** | Express application setup, global middleware, JSON parser, modular route mounting, 404 handler, and centralised error handling pipeline (`server.js`). |
+| **2** | 252U1R8060 | **Abdul Samad** | **Database & Persistence – Major** | SQLite database initialization, relational schema creation, WAL pragma configuration, foreign key enforcement (`PRAGMA foreign_keys = ON`), and atomic database auto-seeding (`db.js`). |
+| **3** | 252U1R8089 | **Karthikeya** | **REST CRUD & Queue Engine – Major** | Full CRUD implementation for 3D printers, designer registration endpoints, and the multi-table `INNER JOIN` query returning live queue states with designer and machine names. |
+| **4** | 252U1R8076 | **Sai Siva Teja** | **Validation Guard & Smart Search Twist – Major** | Strict input validation pipelines (type checking, non-empty whitespace stripping), email regex validation, foreign key existence verification, and the case-insensitive partial Smart Search twist (`?q=...`). |
+| **5** | 252U1R80 | **Anish** | **Testing, Documentation & QA – Major** | Comprehensive 28-request Postman v2.1 test collection with automated test scripts, full regression test suite (`test-all.js`), and exhaustive project documentation (`README.md`). |
 
 ### Contribution Structure
 - **5 Focused Modules:** Server & Middleware, Database Architecture, Core REST & Relational Queries, Validation & Smart Search Twist, and QA / Postman Test Automation.
