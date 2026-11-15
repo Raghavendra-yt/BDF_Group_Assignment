@@ -34,6 +34,11 @@ app.use((err, _req, res, _next) => {
 });
 
 // ── Start server ────────────────────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`🖨️  PrintPoint Centre API running on http://localhost:${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`🖨️  PrintPoint Centre API running on http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
+

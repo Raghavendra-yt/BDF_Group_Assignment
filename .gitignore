@@ -1,2 +1,4 @@
 node_modules/
 printpoint.db
+printpoint.db-shm
+printpoint.db-wal
